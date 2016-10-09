@@ -1,8 +1,8 @@
 /**
-* Class : Quackable.java
+* Class : QuackBehavior.java
 * Pulling out what changes into the separate interfaces
 * 
 */
-public interface Quackable {
+public interface QuackBehavior {
 	public abstract void quack();
 }
