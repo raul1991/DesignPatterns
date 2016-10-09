@@ -1,6 +1,6 @@
 /**
 * Class : MallardDuck.java
-* A Duck that looks like a Mallard and flies with rocket. 
+* A Duck that looks like a Mallard and does not fly at all. 
 * So MallardDuck will extend class Duck.
 * 
 */
@@ -8,7 +8,7 @@ public class MallardDuck extends Duck {
 	
 	public MallardDuck() {
 		quackBehavior = new Quack();
-		flyBehavior = new FlyWithRockets();
+		flyBehavior = new FlyNoWay();
 	}
 
 	@Override
@@ -19,6 +19,11 @@ public class MallardDuck extends Duck {
 	@Override
 	public void display() {
 		//Look something like a mallard here.
+	}
+
+	public void quack() {
+		//I'll just quack.
+		System.out.println("Quack by MallardDuck");
 	}
 
 }

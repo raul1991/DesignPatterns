@@ -8,5 +8,6 @@ public class Quack implements QuackBehavior {
 
 	public void quack() {
 		//I just quack.
+		System.out.println("Quack!");
 	}
 }
