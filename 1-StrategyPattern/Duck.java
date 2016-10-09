@@ -7,6 +7,6 @@ public abstract class Duck {
 	public abstract void quack();
 	public abstract void swim();
 	public abstract void display();
-
+	public abstract void fly();
 	//other duck specific methods.
 }

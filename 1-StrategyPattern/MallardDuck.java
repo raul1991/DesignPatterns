@@ -20,4 +20,9 @@ public class MallardDuck extends Duck {
 	public void display() {
 		//Look something like a mallard here.
 	}
+
+	@Override
+	public void fly() {
+		//Fly to the heaven my birdie
+	}
 }

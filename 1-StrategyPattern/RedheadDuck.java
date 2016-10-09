@@ -21,4 +21,8 @@ public class RedheadDuck extends Duck {
 		//Look something like a Redhead here.
 	}
 
+	@Override
+	public void fly() {
+		//Fly to the heaven my birdie
+	}
 }
