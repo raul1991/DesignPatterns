@@ -7,11 +7,6 @@
 public class MallardDuck extends Duck {
 	
 	@Override
-	public void quack() {
-		//Quack like everyone does.
-	}
-
-	@Override
 	public void swim() {
 		//Swim like the base normal duck does.
 	}
@@ -21,8 +16,4 @@ public class MallardDuck extends Duck {
 		//Look something like a mallard here.
 	}
 
-	@Override
-	public void fly() {
-		//Fly to the heaven my birdie
-	}
 }
