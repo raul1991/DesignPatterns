@@ -40,5 +40,5 @@ read already from this book.
 Discussions are awesome. Join this room on [gitter](https://gitter.im/design_patterns/Lobby)
 
 # Something I want to confess
-I am naive in such design pattern thing , make me learn from you, teach me , find mistakes and have discussion with me . I will happy
+I am naive in such design pattern thing , make me learn from you, teach me , find mistakes and have discussion with me . I will be happy
 to do that.
