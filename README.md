@@ -2,7 +2,7 @@
 Contains the code, mistakes discussed and the modifications described in the book, Head First Design Patterns.
 This repository at its root level will contain different folders of the form **&lt;Exercise No.&gt;-&lt;PatternName&gt;**. Each folder 
 will have a Readme.md describing the requirement that lead to changes in the design.
-Additionally , the Readme.md will contain three sections namely Description, Modifications, Rectifications and Mistakes.
+Additionally , the Readme.md will contain the following sections.
 
 1. **Description**
 
