@@ -5,11 +5,11 @@
 ## Changing Requirements :
 
 0. First Design
-
+	
 	Application should provide three display elements - Current Conditions, weather statistics and a simple forecast, all updated in real time as WeatherData object requires the most recent measurements.
 	We would be changing in the already present source file WeatherData.java and override the measurementChanged() and update all the displays.
 
-	# Modifications :
+	# Modifications : 
 
 	We Created a class WeatherData and inside it's measurementChanged method we update the displays.
 
@@ -19,23 +19,4 @@
 	
 	# Rectification :
 
-	Implementing an Observer pattern. We have created the following classes
-
-	### Interfaces
-	1. Subject
-
-		This will be implemented by the WeatherData class for it is being observed.
-
-	2. Observer
-
-		All the displays should implement this interface in order to be notified about the change in state of the Subject.
-
-	3. DisplayElement
-
-		This interface will be implemented by all the displays and will be modified as per the display requirements.
-
-
-	### Classes
-	1. CurrentConditionsDisplay
-	2. StatisticsDisplay
-	3. ForecastDisplay
+	Implementing an Observer pattern
