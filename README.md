@@ -39,6 +39,10 @@ read already from this book.
 # You want to have a discussion ?
 Discussions are awesome. Join this room on [gitter](https://gitter.im/design_patterns/Lobby)
 
+# Note
+There will always a tag per design pattern to show the start of a new pattern. Tag should be of the form 
+&lt;pattern-no&gt;-requirement-&lt;requirement-no&gt;
+
 # Something I want to confess
 I am naive in such design pattern thing , make me learn from you, teach me , find mistakes and have discussion with me . I will be happy
 to do that.
