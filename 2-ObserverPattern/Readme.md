@@ -19,7 +19,7 @@
 	
 	# Rectification :
 
-	Implementing an Observer pattern. We have created the following classes
+	Implementing an Observer pattern. We have created the following classes and interfaces
 
 	### Interfaces
 	1. Subject
@@ -39,3 +39,19 @@
 	1. CurrentConditionsDisplay
 	2. StatisticsDisplay
 	3. ForecastDisplay
+
+1.  Adding a new Heat Index display element
+
+	Heat index has a well known formula which should be calculated and displayed over this display element.
+
+	# Modifications :
+
+	We start off by implementing the Our Observer and DisplayElement interface for creating such an element and modifying the display method in order to show the HEAT INDEX.
+
+	#Mistakes Identified :
+
+	None
+
+	#Rectification :
+
+	None
