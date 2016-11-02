@@ -4,7 +4,7 @@
 
 ## Changing Requirements :
 
-0. First Design
+0. Premise
 
 	Application should provide three display elements - Current Conditions, weather statistics and a simple forecast, all updated in real time as WeatherData object requires the most recent measurements.
 	We would be changing in the already present source file WeatherData.java and override the measurementChanged() and update all the displays.

@@ -4,6 +4,18 @@
 
 ## Changing Requirements :
 
+0. Premise
+   
+    We started off by creating a base class "Duck" and making two other ducks inheriting from it.
+
+	#Modifications
+
+	None (Since this was the first change)
+
+	#Mistake Identified :
+
+	Due to this design we had all the behaviors in the base classes as well irrespective of their explicit need in those classes.
+
 1. Add ducks those can fly.
 
 	# Modifications : 
