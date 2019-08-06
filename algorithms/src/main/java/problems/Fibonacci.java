@@ -1,3 +1,5 @@
+package problems;
+
 import java.util.stream.IntStream;
 
 public class Fibonacci

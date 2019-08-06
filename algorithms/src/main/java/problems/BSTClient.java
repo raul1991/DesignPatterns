@@ -1,3 +1,5 @@
+package problems;
+
 public class BSTClient
 {
     public static void main(String[] args)

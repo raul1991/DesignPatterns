@@ -1,4 +1,4 @@
-/**
+package problems; /**
  * An array is called Bitonic if it is comprises of an increasing sequence of integers followed immediately by a decreasing sequence of integers.
  * Given a bitonic array A of N distinct integers. Find a element X in it.
  *

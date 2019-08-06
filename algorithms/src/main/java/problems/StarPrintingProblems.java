@@ -1,3 +1,5 @@
+package problems;
+
 public class StarPrintingProblems
 {
     public static void main(String[] args)

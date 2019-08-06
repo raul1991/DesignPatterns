@@ -1,3 +1,5 @@
+package problems;
+
 import java.util.HashMap;
 
 /**

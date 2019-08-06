@@ -18,7 +18,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.examples.interview.preparation</groupId>
     <artifactId>system-design</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>

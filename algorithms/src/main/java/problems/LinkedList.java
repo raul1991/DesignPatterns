@@ -1,3 +1,5 @@
+package problems;
+
 public class LinkedList<T>
 {
     private Node<T> head;

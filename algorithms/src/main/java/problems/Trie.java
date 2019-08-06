@@ -1,5 +1,7 @@
+package problems;
+
 /**
- * Trie is a data structure that is used to store strings' characters, bits in a tree.
+ * problems.Trie is a data structure that is used to store strings' characters, bits in a tree.
  * This data structure looks as follows
  *
  */
@@ -59,7 +61,7 @@ public class Trie
     }
 
     /**
-     * Finds the count of the number of substrings in the Trie.
+     * Finds the count of the number of substrings in the problems.Trie.
      * @param s the substring to find
      * @param index the recursive index
      * @return the number of substring matches

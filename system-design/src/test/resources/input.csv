@@ -1,0 +1,22 @@
+City,Country,Gender,Currency,Average Income
+Hyderabad,IND,M,INR,268560
+New York,USA,F,USD,64971
+Hong kong,HONG KONG,M,HKD,256950
+Bangalore,IND,F,INR,159180
+Bangalore,IND,M,INR,222720
+Chennai,IND,F,INR,172164
+Boston,USA,M,USD,64070
+Hong kong,HONG KONG,F,HKD,181953
+Singapore,SINGAPORE,M,SGP,76860
+New Delhi, ,M,INR,241045
+New York,USA,M,USD,75629
+Singapore,SINGAPORE,F,SGP,60343
+Mumbai,IND,M,INR,233472
+New Delhi, ,F,INR,113433
+London,UK,M,GBP,27531
+Mumbai,IND,F,INR,207216
+London,UK,F,GBP,20446
+Hyderabad,IND,F,INR,137448
+Boston,USA,F,USD,49430
+Houston,USA,M,USD,59994
+Houston,USA,F,USD,46879
