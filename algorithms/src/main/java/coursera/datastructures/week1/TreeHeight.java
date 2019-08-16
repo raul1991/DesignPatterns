@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class TreeHeight {
-    private int[] depth;
 
     public Report run(String inFilePath) throws IOException {
         TreeHeightInterface tree = new TreeHeightInterface();
@@ -67,6 +66,7 @@ public class TreeHeight {
     public class TreeHeightInterface {
         int n;
         int[] parent;
+        int[] depth;
 
         void read(FastScanner in) throws IOException {
             n = in.nextInt();
