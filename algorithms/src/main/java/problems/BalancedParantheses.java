@@ -7,7 +7,7 @@ public class BalancedParantheses
     public static void main(String[] args)
     {
         String[] inputs = new String[]{
-                "{()[}", "{}", "[{}][{}]"
+                "{{{{{{", ")"
         };
         final BalancedParantheses balancedParantheses = new BalancedParantheses();
         for (String in: inputs) {
