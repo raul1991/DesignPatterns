@@ -1,31 +1,30 @@
-package coursera.datastructures.week1;
+package coursera.datastructures.week2;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class TreeHeightTest {
+public class BuildHeapTest {
 
     @Test
-    public void testComputeHeight() {
+    public void testBuildHeap() {
         File files = new File(Objects.requireNonNull(getClass().getClassLoader()
-                .getResource("test-inputs-treeheight")).getFile());
+                .getResource("test-inputs-build-heap")).getFile());
         File[] in = files.listFiles(pathname -> pathname.isFile() && !pathname.getName().endsWith(".a"));
         IntStream.range(0, Objects.requireNonNull(in).length).forEach(idx -> {
             try {
 
                 System.out.println("Input: " + in[idx].getPath());
-                TreeHeight.Report report = new TreeHeight().run(in[idx].getPath());
-                Files.lines(Paths.get(in[idx]+".a")).forEach(expected ->
-                        Assert.assertEquals(Integer.parseInt(expected), report.getResult()));
+                BuildHeap.FastScanner fastScanner = new BuildHeap.FastScanner(new FileReader(in[idx]));
+                new BuildHeap().solve(fastScanner);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
+
 }

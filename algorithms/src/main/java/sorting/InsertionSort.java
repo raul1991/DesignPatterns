@@ -42,7 +42,8 @@ public class InsertionSort {
             int key = nums[j];
             // already sorted hand (0 to j-1)
             int i = j - 1;
-            // step 2. match the new cards with all cards in the sorted hand
+            // step 2. while the picked card is not compared with all cards in the sorted hand, keep swapping, decreasing
+            // i
             while (i > -1 && key < nums[i])
             {
                // move the elements to right

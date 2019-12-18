@@ -17,7 +17,7 @@ public class check_bracketsTest {
         File files = new File(Objects.requireNonNull(getClass().getClassLoader()
                 .getResource("test-inputs-brackets")).getFile());
         File[] in = files.listFiles(pathname -> pathname.isFile() && !pathname.getName().endsWith(".a"));
-        IntStream.range(1, Objects.requireNonNull(in).length).forEach(idx -> {
+        IntStream.range(0, Objects.requireNonNull(in).length).forEach(idx -> {
             try {
                 Files.lines(Paths.get(in[idx].getPath())).forEach(text -> {
                     String output = Bracket.BracketInterface.isOk(text);

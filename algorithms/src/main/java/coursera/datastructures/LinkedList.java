@@ -1,4 +1,4 @@
-package problems;
+package coursera.datastructures;
 
 public class LinkedList<T>
 {
