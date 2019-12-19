@@ -1,7 +1,7 @@
-package coursera.datastructures;
+package trees;
 
 /**
- * coursera.datastructures.Trie is a data structure that is used to store strings' characters, bits in a tree.
+ * trees.Trie is a data structure that is used to store strings' characters, bits in a tree.
  * This data structure looks as follows
  *
  */
@@ -61,7 +61,7 @@ public class Trie
     }
 
     /**
-     * Finds the count of the number of substrings in the coursera.datastructures.Trie.
+     * Finds the count of the number of substrings in the trees.Trie.
      * @param s the substring to find
      * @param index the recursive index
      * @return the number of substring matches

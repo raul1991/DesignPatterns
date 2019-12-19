@@ -1,4 +1,4 @@
-package coursera.datastructures;
+package trees;
 
 public class LinkedList<T>
 {
