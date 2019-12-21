@@ -13,6 +13,15 @@ public class BSTClient {
         printValueIfFound(f);
         f = tree.search(211);
         printValueIfFound(f);
+        // add 211 and search again
+        tree.add(211);
+        printValueIfFound(tree.search(211));
+        Integer deleted = tree.delete(211);
+        if (deleted != null) {
+            System.out.println("Deleted 211 successfully");
+        }
+        // now search it again
+        System.out.println(tree.search(211));
         BinarySearchTree<Integer> smallest = tree.smallest();
         System.out.println(smallest != null ? smallest.getValue() : "Not found!");
     }

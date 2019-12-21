@@ -26,6 +26,7 @@ public class BinarySearchTree<R extends Comparable> {
         this.left = null;
         this.right = null;
         this.parent = null;
+        ++size;
     }
 
     public void add(R value) {
@@ -60,7 +61,7 @@ public class BinarySearchTree<R extends Comparable> {
         // if nothing left to match.
         if (curr.left == null && curr.right == null) return null;
         // or in the left , if the value is smaller
-        else if (curr.data.compareTo(value) == 1) {
+        else if (curr.data.compareTo(value) > 0) {
             if (curr.left == null) return null;
             foundNode = curr.left.search(value);
         }
@@ -91,22 +92,31 @@ public class BinarySearchTree<R extends Comparable> {
         return smallest;
     }
 
-    public BinarySearchTree<R> delete(R value) {
+    public R delete(R value) {
+        if (isEmpty()) {
+            // tree is empty
+            return null;
+        }
+        // search what is to be deleted.
         BinarySearchTree<R> found = this.search(value);
-        R data = found.data;
+        // return null if not found
         if (found == null) return null;
         // leaf node
         else if (found.left == null && found.right == null) {
-            found = null;
+            System.out.println("Root is what you deleted.");
+            return found.data;
         }
         else {
             // non leaf node
+            // find the smallest element, swap it with the value to be deleted
             BinarySearchTree<R> smallest = found.right.smallest();
-            if (smallest == null) return null;
             // swap values only
+            R temp = found.data;
             found.data = smallest.data;
+            smallest.data = temp;
+            smallest = null;
+            return value;
         }
-        return found;
     }
 
     public BinarySearchTree<R> getParent() {
@@ -119,5 +129,9 @@ public class BinarySearchTree<R extends Comparable> {
 
     public int getSize() {
         return size;
+    }
+
+    public boolean isEmpty() {
+        return getSize() == 0;
     }
 }
