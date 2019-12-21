@@ -2,19 +2,26 @@ package trees;
 
 public class BSTClient {
     public static void main(String[] args) {
-        BinarySearchTree tree = new BinarySearchTree(25);
-        tree.add(11);
-        tree.add(9);
-        tree.add(20);
-        tree.add(14);
+        BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>(20);
+        tree.add(1);
+        tree.add(2);
+        tree.add(23);
         tree.add(21);
-        tree.add(15);
-        tree.add(26);
-        tree.add(30);
-        System.out.println(tree.getSize());
-        BinarySearchTree foundNode = tree.search(14);
-        if (foundNode != null) {
-            System.out.println(foundNode.getParent().getValue());
+        BinarySearchTree f = tree.search(1);
+        printValueIfFound(f);
+        f = tree.search(20);
+        printValueIfFound(f);
+        f = tree.search(211);
+        printValueIfFound(f);
+//        System.out.println(tree.smallest());
+    }
+
+    private static void printValueIfFound(BinarySearchTree f) {
+        if (f != null) {
+            System.out.println(f.getParent().getValue());
+        }
+        else {
+            System.out.println("Not found!");
         }
     }
 }
