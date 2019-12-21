@@ -2,7 +2,7 @@ package trees;
 
 public class BSTClient {
     public static void main(String[] args) {
-        BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>(20);
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>(20);
         tree.add(1);
         tree.add(2);
         tree.add(23);
@@ -13,12 +13,13 @@ public class BSTClient {
         printValueIfFound(f);
         f = tree.search(211);
         printValueIfFound(f);
-//        System.out.println(tree.smallest());
+        BinarySearchTree<Integer> smallest = tree.smallest();
+        System.out.println(smallest != null ? smallest.getValue() : "Not found!");
     }
 
     private static void printValueIfFound(BinarySearchTree f) {
         if (f != null) {
-            System.out.println(f.getParent().getValue());
+            System.out.println(f.getParent() != null ? f.getParent().getValue() : "Its at the root");
         }
         else {
             System.out.println("Not found!");

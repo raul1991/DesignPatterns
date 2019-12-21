@@ -55,17 +55,18 @@ public class BinarySearchTree<R extends Comparable> {
     public BinarySearchTree<R> search(R value) {
         BinarySearchTree<R> curr = this;
         BinarySearchTree<R> foundNode = null;
-        if (curr == null) return null;
         // always check the root
         if (curr.data.compareTo(value) == 0) return curr;
         // if nothing left to match.
         if (curr.left == null && curr.right == null) return null;
         // or in the left , if the value is smaller
         else if (curr.data.compareTo(value) == 1) {
+            if (curr.left == null) return null;
             foundNode = curr.left.search(value);
         }
         // or in the right if the value is greater.
         else {
+            if (curr.right == null) return null;
             foundNode = curr.right.search(value);
         }
         return foundNode;
@@ -73,23 +74,21 @@ public class BinarySearchTree<R extends Comparable> {
 
     public BinarySearchTree<R> smallest() {
         BinarySearchTree<R> begin = this;
-        if (begin != null) {
-            boolean isLeafNode = false;
-            while (!isLeafNode) {
-                // keep finding the smallest node
-                int compareTo = begin.getValue().compareTo(begin.right.getValue());
-                if (compareTo <= 0) {
-                    // go right
-                    begin = begin.right;
+        BinarySearchTree<R> smallest;
+        // if has no left node or just one node, root is the smallest
+        if (begin.left == null) return begin;
+        // else
+        // imagine root as the smallest element
+        else {
+            BinarySearchTree<R> pointer = begin.left;
+            smallest = pointer;
+            while ((pointer = pointer.left) != null) {
+                if (pointer.data.compareTo(smallest.data) <= 0) {
+                    smallest = pointer;
                 }
-                else {
-                    begin = begin.left;
-                }
-                isLeafNode = (begin.left == null && begin.right == null);
             }
-            return begin;
         }
-        return null;
+        return smallest;
     }
 
     public BinarySearchTree<R> delete(R value) {
