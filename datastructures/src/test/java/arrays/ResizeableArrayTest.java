@@ -38,6 +38,19 @@ public class ResizeableArrayTest {
     }
 
     @Test
+    public void removeWithIndex() {
+        // item at position 1
+        Integer nextValue = array.get(1);
+        // item at position 0
+        Integer oldValue = array.get(0);
+        assertNotNull(oldValue);
+        // item removed at pos 0
+        assertNotNull(array.remove(0));
+        // assert that values shifted towards 0 po
+        assertNotSame(oldValue, nextValue);
+    }
+
+    @Test
     public void contains() {
         Assert.assertFalse(array.contains(-1));
     }

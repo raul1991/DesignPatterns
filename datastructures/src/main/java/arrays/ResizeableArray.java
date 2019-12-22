@@ -26,24 +26,30 @@ public class ResizeableArray<R> {
     }
 
     public R remove(int index) throws IndexOutOfBoundsException {
+        rangeCheckForAdd(index);
         // find if the index is valid or not
-        if (isValidIndex(index)) {
-            // if valid, copy the shifted items back to this array
-            R oldValue = array[index];
-            int movedItems = size - index - 1;
-            System.arraycopy(array, index + 1, array, index, movedItems);
-            array[--size] = null;
-            return oldValue;
-        }
-        else {
-            throw new ArrayIndexOutOfBoundsException(String.format("Index out of bounds size: %d, index: %d", size, index));
-        }
+        // if valid, copy the shifted items back to this array
+        R oldValue = array[index];
+        int movedItems = size - index - 1;
+        System.arraycopy(array, index + 1, array, index, movedItems);
+        array[--size] = null;
+        return oldValue;
+
         // once shifting is done, make the last entry null to be gced
         // using index here is of no use since it would have been replaced with index + 1 value
     }
 
-    private boolean isValidIndex(int index) {
-        return index < size;
+    private void rangeCheck(int index) {
+        if (index >= size)
+            throw new ArrayIndexOutOfBoundsException(String.format("Index out of bounds size: %d, index: %d", size, index));
+    }
+
+    /**
+     * A version of rangeCheck used by add and addAll.
+     */
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0)
+            throw new ArrayIndexOutOfBoundsException(String.format("Index out of bounds size: %d, index: %d", size, index));
     }
 
     public boolean contains(R item) {
@@ -51,12 +57,8 @@ public class ResizeableArray<R> {
     }
 
     public R get(int index) {
-        if (isValidIndex(index)) {
-            return array[index];
-        }
-        else {
-            throw new ArrayIndexOutOfBoundsException(String.format("Index out of bounds size: %d, index: %d", size, index));
-        }
+        rangeCheck(index);
+        return array[index];
     }
 
     private Object[] resize() {
@@ -80,5 +82,39 @@ public class ResizeableArray<R> {
 
     public int size() {
         return size;
+    }
+
+    public boolean add(R item, int index) {
+        rangeCheckForAdd(index);
+        int movedItems = size - index - 1;
+        System.arraycopy(array, index, array, index + 1, movedItems);
+        array[index] = item;
+        ++size;
+        return true;
+    }
+
+    public R remove(R item) {
+        int pos = -1;
+        if (item == null) {
+            for (int i = 0; i < size; i++) {
+                if (array[i] == null) {
+                    pos = i;
+                    break;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < size; i++) {
+                if (array[i].equals(item)) {
+                    pos = i;
+                    break;
+                }
+            }
+
+        }
+        int movedItems = size - pos - 1;
+        System.arraycopy(array, pos + 1, array, pos, movedItems);
+        array[--size] = null; // deleted item to be gc'ed
+        return pos == -1 ? null : array[pos];
     }
 }
