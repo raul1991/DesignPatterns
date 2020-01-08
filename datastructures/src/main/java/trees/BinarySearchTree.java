@@ -134,4 +134,12 @@ public class BinarySearchTree<R extends Comparable> {
     public boolean isEmpty() {
         return getSize() == 0;
     }
+
+    public BinarySearchTree<R> getLeft() {
+        return left;
+    }
+
+    public BinarySearchTree<R> getRight() {
+        return right;
+    }
 }
