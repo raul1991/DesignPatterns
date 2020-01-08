@@ -1,12 +1,14 @@
 package trees;
 
-public class Queue<T>
+public class QueueUsingLinkedList<T>
 {
     private Node<T> head;
     private Node<T> tail;
+    private int size;
 
     public void add(T data)
     {
+        ++size;
         Node<T> tNode = new Node<>(data);
         tNode.next = null;
         // if it's the first node
@@ -24,6 +26,7 @@ public class Queue<T>
         T data = head.data;
         head = head.next; // move the head to the
         if (head == null) tail = null;
+        --size;
         return data;
     }
 
@@ -36,5 +39,21 @@ public class Queue<T>
         {
             this.data = data;
         }
+    }
+
+    public static void main(String[] args) {
+        QueueUsingLinkedList<Integer> queue = new QueueUsingLinkedList<>();
+        queue.add(1);
+        queue.add(11);
+        queue.add(111);
+        queue.add(1111);
+        while (!queue.isEmpty())
+        {
+            System.out.println(queue.remove());
+        }
+    }
+
+    private boolean isEmpty() {
+        return size == 0;
     }
 }
