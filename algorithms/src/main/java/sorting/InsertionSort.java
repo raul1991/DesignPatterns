@@ -20,8 +20,8 @@ import java.util.Arrays;
  *
  * Explanation
  * -------------------
- * Take this as a way you sort a deck of cards in your hand where you already have a card in your hand and you also
- * pick one card from a deck of cards on the table. Each time you do so, you try to find a place for the newer card
+ * Take this as a way you sort a deck of cards in your hand where you start with an empty hand and you keep
+ * picking a card from a deck of cards on the table. Each time you do so, you try to find a place for the newer card
  * and keep on shifting the already held cards into the next position.
  * Once position is found, you place the newer card there.
  * */

@@ -3,7 +3,7 @@ package sorting;
 public class SelectionSort {
 
     private int[] solve(int[] arr) {
-        int min = 0;
+        int min;
         for (int i = 0; i < arr.length; i++) {
             min = i;
             for (int j = i + 1; j < arr.length; j++) {

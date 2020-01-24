@@ -36,11 +36,11 @@ public class BitManipulation {
     }
 
     public static boolean isEven(int num) {
-        return (num & (num - 1)) == 0;
+        return (num & 1) == 0;
     }
 
     public static boolean isOdd(int num) {
-        return (num & (num - 1)) != 0;
+        return (num & 1) != 0;
     }
 
     public static int totalSetBits(int num) {
