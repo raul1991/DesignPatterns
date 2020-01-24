@@ -8,7 +8,5 @@ public class CrawlerClient
     {
         Crawler crawler = new AsynchronousCrawler("http://mit.edu");
         crawler.beginCrawling();
-
-        Crawler fastCraweler = new FastCrawler("http://mit.edu");
     }
 }
