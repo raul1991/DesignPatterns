@@ -1,12 +1,11 @@
 package crawler;
 
-import java.io.IOException;
+import crawler.newcrawler.ExecutorBasedCrawler;
 
 public class CrawlerClient
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
-        Crawler crawler = new AsynchronousCrawler("http://mit.edu");
-        crawler.beginCrawling();
+        new ExecutorBasedCrawler("https://www.w3schools.com/html/default.asp").beginCrawling();
     }
 }
