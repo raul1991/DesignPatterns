@@ -1,3 +1,5 @@
+![Java CI](https://github.com/raul1991/preparation/workflows/Java%20CI/badge.svg?branch=master&event=push)
+
 # preparation
 A repository containing code exercises, programming assignments, some random problems, applications, system design attempts etc.
 
