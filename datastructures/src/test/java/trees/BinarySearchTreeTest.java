@@ -44,7 +44,9 @@ public class BinarySearchTreeTest {
 
     @Test
     public void delete() {
-
+        Assert.assertNotNull(tree.search(20));
+        Assert.assertNotNull(tree.delete(20));
+        Assert.assertNull(tree.search(20));
     }
 
     @Test

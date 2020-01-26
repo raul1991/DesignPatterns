@@ -1,7 +1,5 @@
 package trees;
 
-import java.util.Comparator;
-
 /**
  * This class is a representation of the BinarySearch Tree which supports the
  * following operations.
@@ -114,7 +112,6 @@ public class BinarySearchTree<R extends Comparable> {
             R temp = found.data;
             found.data = smallest.data;
             smallest.data = temp;
-            smallest = null;
             return value;
         }
     }
