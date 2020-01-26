@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
-        <argLine>-Xss7100k</argLine>
+        <argLine>-Xss3100k</argLine>
     </properties>
     <modules>
         <module>rest-webservices</module>
