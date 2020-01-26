@@ -8,7 +8,9 @@
     <artifactId>interviewpreparation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    <properties>
+        <argLine>-Xss3100k</argLine>
+    </properties>
     <modules>
         <module>rest-webservices</module>
         <module>threads</module>
