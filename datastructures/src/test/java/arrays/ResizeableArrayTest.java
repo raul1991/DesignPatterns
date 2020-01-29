@@ -34,7 +34,9 @@ public class ResizeableArrayTest {
 
     @Test
     public void remove() {
+        Integer itemDeleted = array.get(0);
         assertNotNull(array.remove(0));
+        assertFalse(array.contains(itemDeleted));
     }
 
     @Test
@@ -63,5 +65,14 @@ public class ResizeableArrayTest {
     @Test
     public void isEmpty() {
         assertFalse(array.isEmpty());
+    }
+
+    @Test
+    public void prepend() {
+        Integer oldItemAtZero = array.get(0);
+        array.prepend(4);
+        Integer newItemAtZero = array.get(0);
+        Assert.assertNotSame(oldItemAtZero, newItemAtZero);
+        Assert.assertEquals(4, newItemAtZero.intValue());
     }
 }

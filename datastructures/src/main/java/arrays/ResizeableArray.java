@@ -93,6 +93,16 @@ public class ResizeableArray<R> {
         return true;
     }
 
+    // inserts item at position 0
+    public void prepend(R item) {
+        if (size == 0) {
+            array[0] = item;
+            return;
+        }
+        add(item, 0);
+    }
+
+
     public R remove(R item) {
         int pos = -1;
         if (item == null) {
