@@ -1,6 +1,5 @@
 package trees;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +10,8 @@ public class BinarySearchTreeTest {
     private BinarySearchTree<Integer> tree = new BinarySearchTree<>(20);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        tree.clear();
         addNodes();
     }
 
@@ -25,49 +25,92 @@ public class BinarySearchTreeTest {
 
     @Test
     public void add() {
-        int oldSize = tree.getSize();
+        int oldSize = tree.size();
         tree.add(17);
-        Assert.assertEquals(oldSize + 1, tree.getSize());
+        assertEquals(oldSize + 1, tree.size());
     }
 
     @Test
     public void search() {
-        Assert.assertNotNull(tree.search(20));
-        Assert.assertNotNull(tree.search(15));
-        Assert.assertNull(tree.search(-1));
+        assertNotNull(tree.search(20));
+        assertNotNull(tree.search(15));
+        assertNull(tree.search(-1));
     }
 
     @Test
     public void smallest() {
-        Assert.assertEquals(0, (int)tree.smallest().getValue());
+        assertEquals(0, (int)tree.smallest().getValue());
     }
 
     @Test
     public void delete() {
-        Assert.assertNotNull(tree.search(20));
-        Assert.assertNotNull(tree.delete(20));
-        Assert.assertNull(tree.search(20));
+        assertNotNull(tree.search(20));
+        assertNotNull(tree.delete(20));
+        assertNull(tree.search(20));
     }
 
     @Test
     public void getParent() {
         // root has a null parent
-        Assert.assertNull(tree.getParent());
-        Assert.assertNotNull(tree.search(1).getParent());
+        assertNull(tree.getParent());
+        assertNotNull(tree.search(1).getParent());
     }
 
     @Test
     public void getValue() {
-        Assert.assertNotNull(tree.getValue());
+        assertNotNull(tree.getValue());
     }
 
     @Test
-    public void getSize() {
-        Assert.assertEquals(6, tree.getSize());
+    public void size() {
+        assertEquals(5, tree.size());
     }
 
     @Test
     public void isEmpty() {
-        Assert.assertFalse(tree.isEmpty());
+        assertFalse(tree.isEmpty());
+    }
+
+    @Test
+    public void height() {
+        assertEquals(3, tree.height(tree));
+    }
+
+    @Test
+    public void nthSmallest() {
+        assertEquals(15, tree.smallest(3).intValue());
+    }
+
+    @Test
+    public void max() {
+        assertEquals(21, tree.max().intValue());
+    }
+
+    @Test
+    public void contains() {
+        assertFalse(tree.contains(30));
+        tree.add(30);
+        assertTrue(tree.contains(30));
+    }
+
+    @Test
+    public void clear() {
+        assertFalse(tree.size() == 0);
+        tree.clear();
+        assertEquals(0, tree.size());
+    }
+
+    @Test
+    public void checkBST() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>(22);
+        // left sub tree
+        tree.left = new BinarySearchTree<>(7);
+        tree.left.left = new BinarySearchTree<>(6);
+        tree.left.right = new BinarySearchTree<>(8);
+        // right sub tree
+        tree.right = new BinarySearchTree<>(27);
+        tree.right.left = new BinarySearchTree<>(26);
+        tree.right.right = new BinarySearchTree<>(28);
+        assertTrue(tree.checkBST());
     }
 }

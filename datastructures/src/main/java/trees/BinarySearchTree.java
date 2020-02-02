@@ -1,5 +1,9 @@
 package trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * This class is a representation of the BinarySearch Tree which supports the
  * following operations.
@@ -16,8 +20,8 @@ public class BinarySearchTree<R extends Comparable> {
     private int size;
     private R data;
     private BinarySearchTree<R> parent;
-    private BinarySearchTree<R> left;
-    private BinarySearchTree<R> right;
+    public BinarySearchTree<R> left;
+    BinarySearchTree<R> right;
 
     public BinarySearchTree(R value) {
         this.data = value;
@@ -28,10 +32,10 @@ public class BinarySearchTree<R extends Comparable> {
     }
 
     public void add(R value) {
-        if (value.compareTo(data) == -1) {
+        if (value.compareTo(data) < 0) {
             // go left
             if (left == null) {
-                left = new BinarySearchTree<R>(value);
+                left = new BinarySearchTree<>(value);
             }
             else {
                 left.add(value);
@@ -41,7 +45,7 @@ public class BinarySearchTree<R extends Comparable> {
         else {
             // go right
             if (right == null) {
-                right = new BinarySearchTree<R>(value);
+                right = new BinarySearchTree<>(value);
             }
             else {
                 right.add(value);
@@ -58,7 +62,7 @@ public class BinarySearchTree<R extends Comparable> {
         if (curr.data.compareTo(value) == 0) return curr;
         // if nothing left to match.
         if (curr.left == null && curr.right == null) return null;
-        // or in the left , if the value is smaller
+            // or in the left , if the value is smaller
         else if (curr.data.compareTo(value) > 0) {
             if (curr.left == null) return null;
             foundNode = curr.left.search(value);
@@ -76,8 +80,8 @@ public class BinarySearchTree<R extends Comparable> {
         BinarySearchTree<R> smallest;
         // if has no left node or just one node, root is the smallest
         if (begin.left == null) return begin;
-        // else
-        // imagine root as the smallest element
+            // else
+            // imagine root as the smallest element
         else {
             BinarySearchTree<R> pointer = begin.left;
             smallest = pointer;
@@ -90,6 +94,65 @@ public class BinarySearchTree<R extends Comparable> {
         return smallest;
     }
 
+    public List<R> smallestElements() {
+        List<R> smallestElements = new ArrayList<>();
+        preorder(this, smallestElements);
+        return smallestElements;
+    }
+
+    public void preorder(BinarySearchTree<R> tree, List<R> rs) {
+        if (tree == null) return;
+        BinarySearchTree<R> left = tree.getLeft();
+        if (left != null) {
+            preorder(left, rs);
+        }
+        rs.add(tree.getValue());
+        BinarySearchTree<R> right = tree.getRight();
+        if (right != null) {
+            preorder(right, rs);
+        }
+    }
+
+    /**
+     * Returns the kth smallest element.
+     * @param kth the desired smallest number
+     * @return the number which is the smallest
+     */
+    public R smallest(int kth) {
+        if (kth < 0 || kth > size)
+            throw new IllegalArgumentException("Invalid index passed. Index should be between 1-" + (size - 1));
+        else if (size == 1) return this.getValue();
+        return smallestElements().get(kth - 1);
+    }
+
+    public R max() {
+        if (size == 0) throw new IllegalStateException("Empty tree");
+            // root is the max element.
+        else if (size == 1) return this.getValue();
+        else {
+            BinarySearchTree<R> ptr = this.right;
+            while (ptr.right != null) {
+                ptr = ptr.right;
+            }
+            return ptr.getValue();
+        }
+    }
+    // returns the first occurrence of the data
+    public boolean contains(R data) {
+        return search(data) != null;
+    }
+
+    /**
+     * Returns the length of the max path from root to the leaf node.
+     * @return the height of the tree.
+     */
+    public int height(BinarySearchTree<R> node) {
+        if (node == null) return -1;
+        int left = height(node.getLeft());
+        int right = height(node.getRight());
+        return Math.max(left, right) + 1;
+    }
+
     public R delete(R value) {
         if (isEmpty()) {
             // tree is empty
@@ -99,9 +162,10 @@ public class BinarySearchTree<R extends Comparable> {
         BinarySearchTree<R> found = this.search(value);
         // return null if not found
         if (found == null) return null;
-        // leaf node
+            // leaf node
         else if (found.left == null && found.right == null) {
             System.out.println("Root is what you deleted.");
+            --size;
             return found.data;
         }
         else {
@@ -112,6 +176,7 @@ public class BinarySearchTree<R extends Comparable> {
             R temp = found.data;
             found.data = smallest.data;
             smallest.data = temp;
+            --size;
             return value;
         }
     }
@@ -124,12 +189,12 @@ public class BinarySearchTree<R extends Comparable> {
         return this.data;
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
     public boolean isEmpty() {
-        return getSize() == 0;
+        return size() == 0;
     }
 
     public BinarySearchTree<R> getLeft() {
@@ -138,5 +203,35 @@ public class BinarySearchTree<R extends Comparable> {
 
     public BinarySearchTree<R> getRight() {
         return right;
+    }
+
+    /**
+     * Removes all the nodes in the tree
+     */
+    public void clear() {
+        delete(this);
+        size = 0;
+    }
+
+    private void delete(BinarySearchTree<R> node) {
+        if (node == null) return;
+        delete(node.getLeft());
+        delete(node.getRight());
+    }
+
+    public boolean checkBST() {
+        return checkBST(this);
+    }
+
+    private boolean checkBST(BinarySearchTree<R> root) {
+        if (root == null) return false;
+            // all good if we have reached leaf nodes.
+        else if (root.left == null && root.right == null) return true;
+        else {
+            if ((root.left == null || root.left.data.compareTo(root.getValue()) > 0) ||
+                    (root.right == null || root.right.data.compareTo(root.getValue()) < 0))
+                return false;
+            return checkBST(root.left) && checkBST(root.right);
+        }
     }
 }
