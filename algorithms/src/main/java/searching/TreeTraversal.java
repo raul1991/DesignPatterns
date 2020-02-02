@@ -1,10 +1,8 @@
 package searching;
 
-import coursera.algorithmspart1.week2.LinkedQueue;
 import trees.BinarySearchTree;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.Queue;
 
 public class TreeTraversal {
@@ -45,6 +43,78 @@ public class TreeTraversal {
         }
     }
 
+    public enum TraversalOrder {
+        INORDER,
+        POSTORDER,
+        PREORDER,
+        LEVEL_ORDER // bfs
+    }
+
+    public void print(TraversalOrder order, BinarySearchTree<Integer> tree) {
+        switch (order) {
+            case INORDER:
+                inorder(tree);
+                break;
+            case PREORDER:
+                preorder(tree);
+                break;
+            case POSTORDER:
+                postorder(tree);
+                break;
+            case LEVEL_ORDER:
+                levelorder(tree);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void levelorder(BinarySearchTree<Integer> tree) {
+        bfs(tree);
+    }
+
+    private void postorder(BinarySearchTree<Integer> tree) {
+        if (tree == null) return;
+        // left
+        BinarySearchTree<Integer> left = tree.getLeft();
+        if (left != null) {
+            postorder(left);
+        }
+        // right
+        BinarySearchTree<Integer> right = tree.getRight();
+        if (right != null) {
+            postorder(right);
+        }
+        // root
+        System.out.printf("%d,", tree.getValue());
+    }
+
+    private void preorder(BinarySearchTree<Integer> tree) {
+        if (tree == null) return;
+        System.out.print(tree.getValue() +",");
+        BinarySearchTree<Integer> left = tree.getLeft();
+        if (left != null) {
+            preorder(left);
+        }
+        BinarySearchTree<Integer> right = tree.getRight();
+        if (right != null) {
+            preorder(right);
+        }
+    }
+
+    private void inorder(BinarySearchTree<Integer> tree) {
+        if (tree == null) return;
+        BinarySearchTree<Integer> left = tree.getLeft();
+        if (left != null) {
+            inorder(left);
+        }
+        System.out.print(tree.getValue() +",");
+        BinarySearchTree<Integer> right = tree.getRight();
+        if (right != null) {
+            inorder(right);
+        }
+    }
+
     public static void main(String[] args) {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>(0);
         tree.add(-1);
@@ -52,7 +122,12 @@ public class TreeTraversal {
         tree.add(3);
         tree.add(2);
         tree.add(4);
-        dfs(tree);
-        bfs(tree);
+//        dfs(tree);
+//        bfs(tree);
+        new TreeTraversal().print(TraversalOrder.PREORDER, tree);
+        System.out.println();
+        new TreeTraversal().print(TraversalOrder.POSTORDER, tree);
+        System.out.println();
+        new TreeTraversal().print(TraversalOrder.INORDER, tree);
     }
 }
