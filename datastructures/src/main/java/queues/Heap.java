@@ -1,4 +1,4 @@
-package trees;
+package queues;
 
 import java.util.Arrays;
 
