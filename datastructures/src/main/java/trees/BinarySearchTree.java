@@ -17,18 +17,17 @@ import java.util.List;
 public class BinarySearchTree<R extends Comparable> {
 
     // total number of nodes.
-    private int size;
+    private int size = 1; // for the root node
     private R data;
     private BinarySearchTree<R> parent;
     public BinarySearchTree<R> left;
-    BinarySearchTree<R> right;
+    public BinarySearchTree<R> right;
 
     public BinarySearchTree(R value) {
         this.data = value;
         this.left = null;
         this.right = null;
         this.parent = null;
-        ++size;
     }
 
     public void add(R value) {
@@ -210,13 +209,18 @@ public class BinarySearchTree<R extends Comparable> {
      */
     public void clear() {
         delete(this);
-        size = 0;
+        this.left = null;
+        this.right = null;
+        this.data = null;
+        this.size = 0;
     }
 
     private void delete(BinarySearchTree<R> node) {
         if (node == null) return;
         delete(node.getLeft());
         delete(node.getRight());
+        node.left = null;
+        node.right = null;
     }
 
     public boolean checkBST() {
@@ -226,12 +230,24 @@ public class BinarySearchTree<R extends Comparable> {
     private boolean checkBST(BinarySearchTree<R> root) {
         if (root == null) return false;
             // all good if we have reached leaf nodes.
-        else if (root.left == null && root.right == null) return true;
+        else if (root.left == null || root.right == null) return true;
         else {
-            if ((root.left == null || root.left.data.compareTo(root.getValue()) > 0) ||
-                    (root.right == null || root.right.data.compareTo(root.getValue()) < 0))
+            if (root.left.data.compareTo(root.getValue()) > 0 ||
+                    root.right == null || root.right.data.compareTo(root.getValue()) < 0)
                 return false;
             return checkBST(root.left) && checkBST(root.right);
+        }
+    }
+
+    public int countNodes() {
+        if (this.data == null) return 0;
+        return countNodes(this);
+    }
+
+    private int countNodes(BinarySearchTree<R> node) {
+        if (node == null) return 0;
+        else {
+            return countNodes(node.left) + countNodes(node.right) + 1;
         }
     }
 }

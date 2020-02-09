@@ -7,11 +7,12 @@ import static org.junit.Assert.*;
 
 public class BinarySearchTreeTest {
 
-    private BinarySearchTree<Integer> tree = new BinarySearchTree<>(20);
+    private BinarySearchTree<Integer> tree;
 
     @Before
     public void setUp() {
-        tree.clear();
+        if (tree != null) tree.clear();
+        tree = new BinarySearchTree<>(20);
         addNodes();
     }
 
@@ -63,7 +64,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void size() {
-        assertEquals(5, tree.size());
+        assertEquals(6, tree.size());
     }
 
     @Test
@@ -111,6 +112,15 @@ public class BinarySearchTreeTest {
         tree.right = new BinarySearchTree<>(27);
         tree.right.left = new BinarySearchTree<>(26);
         tree.right.right = new BinarySearchTree<>(28);
+        tree.right.right.right = new BinarySearchTree<>(29);
+        assertEquals(8, tree.countNodes());
+        tree.clear();
+        assertEquals(0, tree.countNodes());
         assertTrue(tree.checkBST());
+    }
+
+    @Test
+    public void countNodes() {
+        assertEquals(6, tree.countNodes());
     }
 }
