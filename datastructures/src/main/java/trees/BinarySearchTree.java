@@ -14,14 +14,14 @@ import java.util.List;
  * 5. find - finds a node in the tree
  * @param <R> - The input type
  */
-public class BinarySearchTree<R extends Comparable> {
+public class BinarySearchTree<R extends Comparable<R>> {
 
     // total number of nodes.
     private int size = 1; // for the root node
     private R data;
     private BinarySearchTree<R> parent;
-    public BinarySearchTree<R> left;
-    public BinarySearchTree<R> right;
+    BinarySearchTree<R> left;
+    BinarySearchTree<R> right;
 
     public BinarySearchTree(R value) {
         this.data = value;
