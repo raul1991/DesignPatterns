@@ -5,7 +5,7 @@ public class DoublyLinkedList<R> {
     private Node<R> tail; // points to the back of the node.
     private int size;
 
-    public void add(R data) {
+    public Node<R> add(R data) {
         Node<R> newNode = new Node<>(data);
 
         if (head == null) {
@@ -22,6 +22,7 @@ public class DoublyLinkedList<R> {
             head = newNode;
         }
         ++size;
+        return newNode;
     }
 
     public void add(R data, int index) {
@@ -86,6 +87,25 @@ public class DoublyLinkedList<R> {
         }
         ptr.prev.next = ptr.next;
         ptr.next.prev = ptr.prev;
+        --size;
+    }
+
+    /**
+     * Removes from the tail
+     */
+    public void remove() {
+        checkEmpty();
+        if (size == 1)
+        {
+            // just one node
+            head = tail = null;
+        }
+        else
+        {
+            // move tail to the next node
+            tail = tail.prev;
+            tail.next = null;
+        }
         --size;
     }
 

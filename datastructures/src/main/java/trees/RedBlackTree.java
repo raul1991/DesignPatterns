@@ -95,6 +95,127 @@ public class RedBlackTree<R extends Comparable<R>> implements IRedBlackTree<R> {
                 add(parent.left, newNode);
             }
         }
+        checkColor(newNode);
+    }
+
+    private void checkColor(Node<R> node) {
+        if (node == root) return;
+        // check if two consecutive nodes are red
+        if (node.isRed() && node.parent.isRed())
+        {
+            // found two consecutive red nodes.
+            performCorrection(node);
+        }
+        checkColor(node.parent);
+    }
+
+    private void performCorrection(Node<R> node) {
+        if (node.parent.isLeft()) {
+            if (node.isAuntBlack()) {
+                // perform rotations
+                performRotation(node);
+            }
+            else if (node.getAunt() != null) {
+                // grandparent to red
+                node.parent.parent.right.isBlack = false;
+                // parent to black
+                node.parent.isBlack = true;
+                // aunt to black
+                node.getAunt().isBlack = true;
+            }
+        } else {
+            if (node.isAuntBlack()) {
+                // color flip
+                performRotation(node);
+            }
+            else if (node.getAunt() != null) {
+                // grandparent to red
+                node.parent.parent.left.isBlack = false;
+                // parent to black
+                node.parent.isBlack = true;
+                // aunt to black
+                node.getAunt().isBlack = true;
+            }
+        }
+    }
+
+    private void performRotation(Node<R> node) {
+        if (node.isLeft()) {
+            // parent can either be left or right to the grandparent
+            if (node.parent.isLeft()) {
+                // right rotate
+                rotateRight(node);
+            }
+            else {
+                // left right rotate
+                rotateLeftRight(node);
+            }
+        }
+        else {
+            // parent can either be left or right to the grandparent
+            if (node.parent.isRight()) {
+                // left rotate
+                rotateLeft(node);
+            }
+            else {
+                // right left rotate
+                rotateRightLeft(node);
+            }
+        }
+    }
+
+    private Node<R> rotateRight(Node<R> node) {
+        Node<R> p = node.parent;
+        // grandparent's left child saved
+        Node<R> temp = node.left;
+        if (temp.right != null) {
+            temp.right.parent = node;
+        }
+        if (p != null) {
+            if (p.right == node) {
+                p.right = temp;
+            }
+            else {
+                p.left = temp;
+            }
+        }        // left of grandparent to be the temp's right child
+        node.left = temp.right;
+        // temp's right should point to the node.
+        temp.right = node;
+        temp.parent = p;
+        node.parent = temp;
+        return temp;
+    }
+
+    private Node<R> rotateLeft(Node<R> node) {
+        Node<R> p = node.parent;
+        Node<R> temp = node.right;
+        if (temp.left != null) {
+            temp.left.parent = node;
+        }
+        if (p != null) {
+            if (p.right == node) {
+                p.right = temp;
+            }
+            else {
+                p.left = temp;
+            }
+        }
+        node.right = temp.left;
+        temp.left = node;
+        temp.parent = p;
+        node.parent = temp;
+        return temp;
+    }
+
+    private Node<R> rotateLeftRight(Node<R> node) {
+        node.left = rotateLeft(node.left);
+        return rotateRight(node);
+    }
+
+    private Node<R> rotateRightLeft(Node<R> node) {
+        node.right = rotateRight(node.right);
+        return rotateLeft(node);
     }
 
     private int height(Node<R> node) {
@@ -147,23 +268,27 @@ public class RedBlackTree<R extends Comparable<R>> implements IRedBlackTree<R> {
             return !this.isLeft;
         }
 
+        public boolean hasParent() {
+            return this.parent != null;
+        }
+
         public R getData() {
             return data;
         }
         /**
          * If 'this' node is the left child then the aunt would be in the right else left side.
-         * @param node the node whose aunt is needed
          * @return this node's aunt
          */
-        public Node<R> getAunt(Node<R> node) {
-            if (node.isLeft()) {
-                return node.parent != null ? node.parent.parent.right : null;
+        public Node<R> getAunt() {
+            if (this.parent.isLeft()) {
+                return this.parent.parent.right;
             }
-            return node.parent != null ? node.parent.parent.left : null;
+            return this.parent != null ? this.parent.parent.left : null;
         }
 
-        public boolean isAuntBlack(Node<R> node) {
-            return !getAunt(node).isRed();
+        public boolean isAuntBlack() {
+            Node<R> aunt = getAunt();
+            return aunt == null || aunt.isBlack;
         }
 
         /**

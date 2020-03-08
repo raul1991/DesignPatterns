@@ -55,4 +55,15 @@ public class DoublyLinkedListTest {
         dList.clear();
         dList.remove(0);
     }
+
+    @Test
+    public void removeTheFirstInsertedItem()
+    {
+        int lastItem = dList.get(dList.size() - 1);
+        int firstToLastItem = dList.get(dList.size() - 2);
+        assertEquals(0, lastItem);
+        dList.remove();
+        // second last becomes the new last item
+        assertEquals(firstToLastItem, dList.get(dList.size() - 1).intValue());
+    }
 }
