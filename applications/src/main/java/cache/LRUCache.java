@@ -57,13 +57,15 @@ public class LRUCache<K, V> implements Cache<K,V> {
             // remove and move it at the head
             Node<V> existingNode = cache.get(key);
             remove(existingNode);
-            add(existingNode.data);
+            cache.put(key, add(existingNode.data));
+            return Optional.ofNullable(existingNode.data);
         }
         return Optional.empty();
     }
 
     @Override
     public void put(K key, V value) {
+
         if (size == capacity)
         {
             if (exists(key))
@@ -73,7 +75,6 @@ public class LRUCache<K, V> implements Cache<K,V> {
             }
             else
             {
-                // new addition to the head
                 // remove the eldest node, add new node at the head
                 remove(tail);
             }
@@ -144,16 +145,31 @@ public class LRUCache<K, V> implements Cache<K,V> {
     }
 
     private void remove(Node<V> node) {
-        if (node.prev == null)
+        if (head != null)
         {
-            tail = tail.next;
-            tail.prev = null;
-        }
-        else {
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
-            node.prev = null;
-            node.next = null;
+            if (head == node)
+            {
+                head = null;
+                node.next = null;
+                node.prev = null;
+                node.data = null;
+            }
+            else if (node.isEndNode())
+            {
+                if (node.prev == null)
+                {
+                    tail = tail.next;
+                }
+                else {
+                    head = head.prev;
+                }
+            }
+            else if (node.isMiddleNode())
+            {
+                node.prev.next = node.next;
+                node.prev = null;
+                node.next = null;
+            }
         }
     }
 
@@ -169,5 +185,34 @@ public class LRUCache<K, V> implements Cache<K,V> {
             this.prev = null;
             this.data = data;
         }
+
+        public boolean isEndNode() {
+            return this.prev != null || this.next != null;
+        }
+
+        public boolean isMiddleNode() {
+            return this.prev != null && this.next != null;
+        }
+    }
+
+    public boolean isEmpty()
+    {
+        return head == null && tail == null;
+    }
+
+    public void clear()
+    {
+        if (isEmpty()) return;
+        while (tail != null)
+        {
+            Node<V> temp = tail;
+            tail = tail.next;
+            temp.data = null;
+            temp.next = null;
+            temp.prev = null;
+            --size;
+        }
+        cache.clear();
+        head = tail = null;
     }
 }
