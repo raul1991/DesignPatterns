@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
@@ -13,23 +11,22 @@ import static org.junit.Assert.*;
 public class ResizeableArrayTest {
 
     private static final int NO_OF_ITEMS_TO_ADD = 10;
-    private ResizeableArray<Integer> array = new ResizeableArray<>();
-    private Random random = new Random();
+    private final ResizeableArray<Integer> array = new ResizeableArray<>();
 
     @Before
     public void setUp() {
         array.clear();
-        addRandomItems(NO_OF_ITEMS_TO_ADD);
+        addItems();
     }
 
     @Test
     public void add() {
         Assert.assertFalse(array.isEmpty());
-        assertEquals(array.size(), NO_OF_ITEMS_TO_ADD);
+        assertEquals(NO_OF_ITEMS_TO_ADD, array.size());
     }
 
-    private void addRandomItems(int noOfItemsToAdd) {
-        IntStream.rangeClosed(1, noOfItemsToAdd).map(i -> random.nextInt(NO_OF_ITEMS_TO_ADD * 10)).forEach(array::add);
+    private void addItems() {
+        IntStream.rangeClosed(1, NO_OF_ITEMS_TO_ADD).forEach(array::add);
     }
 
     @Test
