@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Running depdency analyze
-      run: (mvn dependency:analyze > analysis.txt | grep -e "Used undeclared dependencies found") && (echo"Failed because of dependency issues";exit 1) || echo "Build passed"
+    - name: Running maven dependency analysis plugin
+      run: mvn dependency:analyze > analysis.txt
     - name: Checking for used undeclared dependency
       run: (cat analysis.txt | grep -e "Used undeclared dependencies found") && (echo "Failed because of dependency issues";exit 1) || (echo "Build passed";exit 0)
