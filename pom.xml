@@ -11,6 +11,7 @@
     <properties>
         <!-- stack size for tree height test case -->
         <argLine>-Xss7100k</argLine>
+        <org.junit>5.6.1</org.junit>
     </properties>
     <modules>
         <module>rest-webservices</module>
@@ -22,7 +23,47 @@
         <module>system-design</module>
         <module>datastructures</module>
     </modules>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${org.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${org.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${org.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- added to run the old junit version based testcases -->
+            <dependency>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>${org.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.15.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <scope>test</scope>
+                <version>4.13</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <finalName>${project.parent.artifactId}.${project.artifactId}</finalName>
         <plugins>
@@ -31,6 +72,16 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude/>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
