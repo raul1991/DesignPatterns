@@ -23,4 +23,4 @@ jobs:
     - name: Running maven dependency analysis plugin
       run: mvn dependency:analyze > analysis.txt
     - name: Checking for used undeclared dependency
-      run: (cat analysis.txt | grep -e "Used undeclared dependencies found") && (echo "Failed because of dependency issues";exit 1) || (echo "Build passed";exit 0)
+      run: (cat analysis.txt | grep -e "Used undeclared dependencies found") && echo "Failed because of dependency issues";cat analysis.txt;exit 1 || echo "Build passed";exit 0
