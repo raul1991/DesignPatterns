@@ -38,7 +38,7 @@ public class SummaryReport implements Report {
         // group by operation
         Map<String, Map<String, Double>> collect = rows.stream()
                 .map(rowData -> getMatchingCells(criteria, rowData))
-                .collect(groupingBy(cells -> getCountryOrElseCity(cells),
+                .collect(groupingBy(this::getCountryOrElseCity,
                             groupingBy(cells -> cells.get(2).getValue(),
                                 averagingDouble(cells -> toUSD(
                                         Double.parseDouble(cells.get(4).getValue()), cells.get(3).getValue())))));
