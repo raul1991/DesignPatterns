@@ -1,7 +1,16 @@
 package linkedlists;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class SinglyLinkedList<R> {
     private int size; // total items inside
+
+    public R getHead() {
+        return head.data;
+    }
+
     private Node<R> head; // points to the latest node
 
     public int size() {
@@ -123,6 +132,44 @@ public class SinglyLinkedList<R> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public Node<R> reverse() {
+        Node<R> prev = null;
+        Node<R> curr = head;
+        Node<R> next = null;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+
+    /**
+     * Tells if this linked list is a palindrome or not.
+     * This algorithm assumes that you provide it some numbers to deal with.
+     * @return
+     */
+    public boolean isPalindrome() {
+        Map<R, Integer> map = new HashMap<>();
+        Node<R> curr = head;
+        boolean oddFound = false;
+        while(curr.next != null) {
+            Integer d = map.getOrDefault(curr.data, 0);
+            map.put(curr.data, d + 1); // freq update
+            curr = curr.next;
+        }
+
+        for (R key : map.keySet()) {
+            if (map.get(key) % 2 != 0) {
+                if (oddFound) return false;
+                oddFound = true;
+            }
+        }
+        return true;
     }
 
     private class Node<E> {

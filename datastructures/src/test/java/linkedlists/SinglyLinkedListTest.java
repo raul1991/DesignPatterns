@@ -67,4 +67,27 @@ public class SinglyLinkedListTest {
         list.clear();
         list.remove(0);
     }
+
+    @Test
+    public void reverse() {
+        Assert.assertEquals(9, list.getHead().intValue());
+        list.reverse();
+        Assert.assertEquals(0, list.getHead().intValue());
+    }
+
+    @Test
+    public void isPalindrome() {
+        list.clear();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(1);
+        Assert.assertEquals(false, list.isPalindrome());
+        list.clear();
+        list.add(1);
+        list.add(2);
+        list.add(1);
+        Assert.assertEquals(true, list.isPalindrome());
+    }
 }

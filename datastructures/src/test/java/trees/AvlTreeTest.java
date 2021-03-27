@@ -4,19 +4,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 public class AvlTreeTest {
 
-    private AvlTree<Integer> tree;
-    private int totalItems = 100;
+    private final AvlTree<Integer> tree = new AvlTree<>();
+    private final int totalItems = 100;
 
     @Before
     public void setUp() {
-        tree = new AvlTree<>();
+        tree.clear();
         IntStream.range(0, totalItems).forEach(tree::add);
         Assert.assertEquals(totalItems, tree.size());
     }
@@ -36,7 +33,7 @@ public class AvlTreeTest {
 
     @Test
     public void heightWithOneNode() {
-        tree = new AvlTree<>();
+        tree.clear();
         tree.add(0);
         Assert.assertEquals(1, tree.size());
         Assert.assertEquals(0, tree.height());
@@ -44,7 +41,7 @@ public class AvlTreeTest {
 
     @Test
     public void heightWithNoNode() {
-        tree = new AvlTree<>();
+        tree.clear();
         Assert.assertEquals(0, tree.size());
         Assert.assertEquals(-1, tree.height());
     }

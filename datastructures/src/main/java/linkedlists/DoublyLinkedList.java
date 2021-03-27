@@ -1,5 +1,7 @@
 package linkedlists;
 
+import java.util.LinkedList;
+
 public class DoublyLinkedList<R> {
     private Node<R> head; // points to the head node where insertions happen.
     private Node<R> tail; // points to the back of the node.

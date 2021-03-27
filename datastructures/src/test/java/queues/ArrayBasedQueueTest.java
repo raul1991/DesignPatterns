@@ -3,34 +3,29 @@ package queues;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.stream.IntStream;
 
 public class ArrayBasedQueueTest {
 
     private static final int TOTAL_ITEMS = 10;
-    private ArrayBasedQueue<Integer> queue = new ArrayBasedQueue<>(TOTAL_ITEMS, false);
+    private Queue<Integer> queue = new Queue<>();
 
     @Before
     public void setUp() {
-        if (!queue.isEmpty()) queue.clear();
-        queue.shouldOverwrite(false);
-        IntStream.range(0, TOTAL_ITEMS).forEach(queue::enqueue);
+        Queue<Integer> integerQueue = queue;
+        IntStream.range(0, TOTAL_ITEMS).forEach(integerQueue::enqueue);
     }
 
     @Test
     public void isEmpty() {
         Assert.assertFalse(queue.isEmpty());
-        queue.clear();
-        Assert.assertTrue(queue.isEmpty());
-        Assert.assertEquals(queue.getReadPos(), queue.getWritePos());
     }
 
     @Test
     public void isFull() {
         Assert.assertTrue(queue.isFull());
-        queue.clear();
-        Assert.assertTrue(queue.isEmpty());
     }
 
     @Test(expected = IllegalStateException.class)
@@ -38,29 +33,40 @@ public class ArrayBasedQueueTest {
         queue.enqueue(2);
     }
 
-    @Test
-    public void enqueueWithOverwriteFlag() {
-        queue.shouldOverwrite(true);
-        queue.enqueue(2);
-    }
-
-    @Test
-    public void enqueueAfterRemove() {
-        Assert.assertEquals(0, queue.dequeue().intValue());
-        queue.enqueue(2);
-        Assert.assertEquals(TOTAL_ITEMS, queue.size());
-    }
-
+//    @Test
+//    public void enqueueWithOverwriteFlag() {
+//        queue.shouldOverwrite(true);
+//        queue.enqueue(2);
+//    }
+//
+//    @Test
+//    public void enqueueAfterRemove() {
+//        Assert.assertEquals(0, queue.dequeue().intValue());
+//        queue.enqueue(2);
+//        Assert.assertEquals(TOTAL_ITEMS, queue.size());
+//    }
+//
     @Test(expected = IllegalStateException.class)
     public void dequeue() {
-        queue.clear();
-        queue.dequeue();
+        IntStream.rangeClosed(0, 9).forEach(i -> System.out.println(queue.dequeue()));
     }
 
     @Test
-    public void dequeueValidCase() {
-        Integer data = queue.dequeue();
-        Assert.assertEquals(0, data.intValue());
+    public void enqueueDequeAlternating() {
+        // remove all the elements.
+        IntStream.range(0, TOTAL_ITEMS).forEach(i -> queue.dequeue());
+
+        // enqueue two times more elements than we deque
+        IntStream.rangeClosed(0, 9).forEach(i -> {
+            if (i % 2 == 0) {
+                System.out.println("De-queueing " + i);
+                queue.dequeue();
+            }
+            else {
+                System.out.println("Enqueueing " + i);
+                queue.enqueue(i);
+            }
+        });
     }
 
     @Test
