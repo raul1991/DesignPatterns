@@ -16,13 +16,8 @@
         <surefire.plugin.version>2.22.2</surefire.plugin.version>
     </properties>
     <modules>
-        <module>rest-webservices</module>
         <module>threads</module>
-        <module>applications</module>
-        <module>design-patterns</module>
-        <module>java8-features</module>
         <module>algorithms</module>
-        <module>system-design</module>
         <module>datastructures</module>
     </modules>
     <dependencyManagement>
